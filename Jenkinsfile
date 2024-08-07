@@ -1,5 +1,7 @@
 //Note: you can set your own vars ex: CODE_CHANGES == getCodeChanges() == getCodeChanges would be a script to check code changes
 
+def gv //Global var for script
+
 pipeline {
     agent any
 
@@ -13,6 +15,15 @@ pipeline {
     }
     
     stages {
+
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
+        
         stage("Build") {
             //when {
             //    expression {
@@ -21,7 +32,9 @@ pipeline {
             //}
             steps {
                 echo "Building version: ${CURRENT_VERSION}"
-                echo 'Building the App...'
+                script {
+                    gv.buildApp()
+                }
             }
         }
         stage("Test") {
