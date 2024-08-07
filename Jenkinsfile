@@ -8,7 +8,7 @@ pipeline {
         CURRENT_VERSION = '1.1'
     }
 
-    paramters{
+    parameters{
         choice(name: 'Type', choices: ['Small', 'Medium', 'Large'], description: 'Size')
     }
     
