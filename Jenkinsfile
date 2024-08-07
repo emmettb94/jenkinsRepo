@@ -9,16 +9,16 @@ pipeline {
     }
 
     parameters{
-        choice(name: 'Type', choices: ['Small', 'Medium', 'Large'], description: 'Size')
+        choice(name: 'TYPE', choices: ['Small', 'Medium', 'Large'], description: 'Size')
     }
     
     stages {
         stage("Build") {
-            when {
-                expression {
+            //when {
+            //    expression {
                     //Example cont. (See note at top) CODE_CHANGES == true
-                }
-            }
+            //    }
+            //}
             steps {
                 echo "Building version: ${CURRENT_VERSION}"
                 echo 'Building the App...'
@@ -37,7 +37,7 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                echo 'Deploying the App...'
+                echo "Deploying the App... ${params.TYPE}"
             }
         }
     }
